@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+div.device {
+    background-image: url('tablet.jpg');
+    border:2px solid black;
+}
+
+div.tv {
+    background-image: url('oldtv.jpg');
+}
+
+div.iphone {
+    background-image: url('iphone3.jpg');
+    border:2px solid black;
+    background-repeat: no-repeat;
+}
+
+.iframe {
+    border:3px solid black;
+    margin-left: 85px;
+    margin-top:70px;
+    width:440px;
+    height:300px;
+    opacity:1;
+}
+
+.iframeTv {
+    border:1px solid black;
+    margin-left: 100px;
+    margin-top: 135px ;
+    border-radius: 30px 30px;
+    padding-top:0px;
+    opacity:0.9;
+    width:360px;
+    height:290px;
+
+}
+
+.iframeIphone {
+    margin-left:25px;
+    margin-top:70px;
+    width:250px;
+    height:400px;
+    opacity:0.8;
+}
+
+        .cube {
+            transform-style: preserve-3d;
+            position:relative;
+            width:250px;
+            height:250px;
+            transform: rotateX(45deg) rotateY(45deg);
+            border:2px solid black;
+        }
+        .cube2 {
+            transform-style: preserve-3d;
+            position:absolute;
+            top:20px;
+            left:200px;
+            width:500px;
+            height:500px;
+            transform: rotateX(45deg) rotateY(45deg);
+            border:3px solid black;
+            transition: all 1s linear;
+            
+        }
+
+        .cube2.transition {
+            width:680px;
+            height:700px;
+        }
+
+        .cube:hover {
+            animation: rotate-cube 10s infinite linear;
+        }
+        .side {
+            position:absolute;
+            width: 280px;
+            height:280px;
+        }
+        .back.side {
+            perspective: 1000px;
+            transform: translateX(100px) translateY(150px) translateZ(-150px);
+            background-color: hsl(190deg 100% 70%);
+            display:'block';
+            border:2px solid black;
+            transition: all 1s linear;
+
+        }
+        .front.side {
+            perspective: 100px;
+            transform: translateX(100px) translateY(150px) translateZ(150px);
+            background-color: hsl(190, 81%, 39%,0.5);
+            display:'block';
+            border:2px solid black;
+            transition: all 1s linear;
+        }
+        .left.side {
+            transform: translateX(-50px) translateY(150px) rotateY(-90deg);
+            perspective: 1000px;
+            background-color: rgb(196, 84, 39,0.8);
+            display:'block';
+            border:2px solid black;
+            transition: all 1s linear;
+        }
+        .right.side {
+            transform: translateX(250px)  translateY(150px) rotateY(90deg);
+            background-color: rgb(81, 34, 211,0.7);
+            display:'block';
+            border:2px solid black;
+            transition: all 1s linear;
+        }
+        .top.side {
+            transform: translateX(20px) translateY(0px) translateZ(400px);
+            opacity:0.5;
+        }
+
+        .right.side.transition {
+            transform: translateX(350px) translateY(300px) rotateY(0deg) translateZ(-20px);
+            border: 3px solid black;
+        }
+        .front.side.transition {
+            transform: translateX(350px) translateY(0px) rotateY(0deg) translateZ(-20px);
+            border: 3px solid black;
+        }
+        .left.side.transition {
+            transform: translateY(0px) rotateY(360deg) translateZ(-20px);
+            border: 3px solid black;
+        }
+        .back.side.transition {
+            transform: translateY(300px) translateZ(-20px);
+            border: 3px solid black;
+        }
+
+        @keyframes rotate-cube {
+            0%{transform: rotateX(45deg) rotateY(45deg) }
+            25%{transform: rotateX(-45deg) rotateY(45deg)}
+            50%{transform: rotateX(-45deg) rotateY(-45deg)}
+            75%{transform: rotateX(45deg) rotateY(-45deg) }
+            100%{transform: rotateX(45deg) rotateY(45deg) }
+        }
+
+        @keyframes unfold {
+            0% {transform: translateX(350px) translateY(150px) rotateY(90deg)}
+            50% {transform: translateX(350px) translateY(150px) rotateY(45deg)}
+            100% {transform: translateX(350px) translateY(150px) rotateY(0deg)}
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <!-- <div class="cube">
+        <div class="front side"></div>
+        <div class="left side"></div>
+        <div class="right side"></div>
+        <div class="back side"></div>
+    </div> -->
+
+    <div id="ex1" class="container">
+        <button onclick="changeCSS()">Change CSS</button>
+        <div id="ex1-layer" class="cube2"></div>
+        
+    </div>
+    
+<script>
+    const cube = document.querySelector('.cube2')
+    console.log(cube)
+
+    var isCube = false
+
+    
+
+    function Element( id, x, y, z, ry,pos) {
+        this.x=x
+        this.y=y
+        this.z=z
+        this.ry=ry
+        this.pos=pos
+        i=90
+        const div = document.createElement( 'div' );
+        
+        //div.style.transform = `rotate3d(${this.x},${this.y},${this.z},${this.ry}deg)`; //rotates deg around a vector (x,y,z)    
+        const iframe = document.createElement( 'iframe' );
+        div.className=this.pos
+        div.classList.add('side') 
+        //div.classList.add('tv') 
+        /*div.style.width = '480px';
+        div.style.height = '320px';*/
+        iframe.style.width='280px'
+        iframe.style.height = '280px';
+        iframe.style.border = '0px';
+        iframe.src = [ 'https://www.youtube.com/embed/', id, '?autoplay=1' ].join( '' );
+        //iframe.className='iframeTv'
+        div.appendChild(iframe)
+        cube.appendChild(div)
+        this.rotateLeft= function (){
+            this.ry-=5
+            div.style.transform = `rotate3d(${this.x},${this.y},${this.z},${this.ry}deg)`;
+        }
+        this.rotateRight= function (){
+            this.ry+=5
+            div.style.transform = `rotate3d(${this.x},${this.y},${this.z},${this.ry}deg)`;
+        }
+        
+    }
+
+    function Element2( path, x, y, z, ry,pos) {
+        this.x=x
+        this.y=y
+        this.z=z
+        this.ry=ry
+        this.pos=pos
+        i=90
+        const div = document.createElement( 'div' );
+        
+        //div.style.transform = `rotate3d(${this.x},${this.y},${this.z},${this.ry}deg)`; //rotates deg around a vector (x,y,z)    
+        const iframe = document.createElement( 'iframe' );
+        div.className=this.pos
+        div.classList.add('side')  
+        iframe.style.width='500px'
+        iframe.style.height = '580px';
+        iframe.style.border = '0px';
+        iframe.src = path;
+        div.appendChild(iframe)
+        cube.appendChild(div)
+        this.rotateLeft= function (){
+            this.ry-=5
+            div.style.transform = `rotate3d(${this.x},${this.y},${this.z},${this.ry}deg)`;
+        }
+        this.rotateRight= function (){
+            this.ry+=5
+            div.style.transform = `rotate3d(${this.x},${this.y},${this.z},${this.ry}deg)`;
+        }
+        
+    }
+
+
+
+
+
+let vid1= new Element( 'aLwTqZ1Yw_U', 10, 0, 0, 0,'front'); 
+let vid2= new Element( 'jzDYPFNdI0Y', 10, 0, 0, 20,'left')
+let vid3= new Element( 'Imixg3jrJS8', 10, 0, 0, 40,'right')
+let vid4= new Element( 'H_5j0uzlYfo', 10, 0, 0, 60,'back'); 
+let vid5= new Element2('https://en.wikipedia.org/wiki/Quaternion',10,0,0,80,'top')
+
+
+function changeCSS(){
+    let right=document.querySelector('.right')
+    let front=document.querySelector('.front')
+    let left=document.querySelector('.left')
+    let back=document.querySelector('.back')
+    right.classList.toggle('transition')
+    front.classList.toggle('transition')
+    left.classList.toggle('transition')
+    back.classList.toggle('transition')
+    cube.classList.toggle('transition')
+    console.log(right.classList)
+
+    }
+
+document.onkeydown = function(e) { 
+    //console.log(e.keyCode)
+    e.preventDefault();
+    if (e.keyCode === 37) {       // left
+      console.log('left')
+      vid1.rotateLeft()  
+      vid2.rotateLeft()
+      vid3.rotateLeft()
+      vid4.rotateLeft()
+      
+    //This function above rotates the element when the left arrow is pressed 
+    //the number 37 represents the UNICODE value in 
+    //usually characters are stored either in Binary(powers of 2) or Hexadecimal (powers of 16)
+    }
+    else if (e.keyCode === 39) {  // 
+      console.log('right')
+      vid1.rotateRight()
+      vid2.rotateRight()
+      
+    }
+    else if (e.keyCode == 38){ 
+        console.log('up')
+  
+        
+    }
+    else if (e.keyCode == 40){ 
+        console.log('down')
+    
+    }
+}
+
+let mouseOverContainer = document.getElementById("ex1");
+let ex1Layer = document.getElementById("ex1-layer");
+
+let constraint=6;
+
+
+
+function transforms(x, y, el) {
+  let box = el.getBoundingClientRect();
+  let calcX = -(y - box.y - (box.height / 2)) / constraint;
+  let calcY = (x - box.x - (box.width / 2)) / constraint;
+  
+  return "perspective(1000px) "
+    + "   rotateX("+ calcX +"deg) "
+    + "   rotateY("+ calcY +"deg) ";
+};
+
+
+ function transformElement(el, xyEl) {
+  el.style.transform  = transforms.apply(null, xyEl);
+  
+}
+
+
+
+
+
+var isMouseDown = false;
+document.onmousedown = function() { isMouseDown = true  };
+document.onmouseup   = function() { isMouseDown = false };
+
+//document.ontouchstart = function() {isTouched = true}
+
+document.onmousemove = function(e) { //rotates the perspective when mouse button is held down & moved
+ if(isMouseDown){
+    let xy = [e.clientX,e.clientY];
+  console.log(xy)
+  let position  = xy.concat([ex1Layer]);
+
+  window.requestAnimationFrame(function(){
+    transformElement(ex1Layer, position);
+  });
+
+ }
+  
+};
+
+mouseOverContainer.addEventListener('touchmove', function (event) {
+  //if one finger touch
+  if(event.targetTouches.length == 1)
+  {
+     var touch = event.targetTouches[0];
+    
+    mouseOverContainer.style.left = touch.pageX + 'px';
+    mouseOverContainer.style.top = touch.pageY + 'px';
+  }
+}, false);
+
+
+
+
+
+
+</script>
+</body>
+</html>

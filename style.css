@@ -1,0 +1,148 @@
+div#container{
+    border: 2px solid black;
+}
+
+div.device {
+    top:300px;
+    background-image: url('tablet.jpg');
+    background-size: 600px 580px;
+    border:2px solid black;
+    width:600px;
+    height:580px;
+}
+
+div.tv {
+    background-image: url('oldtv.jpg');
+    width:600px;
+    height:500px;
+    
+}
+div#tv {
+  position: absolute;
+  cursor: move;
+  z-index: 9;
+  background-color: #f1f1f1;
+  text-align: center;
+  border: 1px solid #d3d3d3;
+}
+
+div#device {
+  position: absolute;
+  cursor: move;
+  z-index: 9;
+  text-align: center;
+  border: 1px solid #d3d3d3;
+}
+
+div.iphone {
+    position:absolute;
+    top:10px;
+    left:600px;
+    background-image: url('iphone3.jpg');
+    border:3px solid black;
+    background-repeat: no-repeat;
+    background-size: 400px 600px;
+    width:380px;
+    height:600px
+    
+}
+
+div.gameboy {
+    position:absolute;
+    top:0px;
+    left:300px;
+    background-image: url('gameboy.jpeg');
+    border:3px solid black;
+    background-repeat: no-repeat;
+    background-size: 500px 300px;
+    width:500px;
+    height:300px
+    
+}
+
+.iframe {
+    margin-left: -20px;
+    margin-top:56px;
+    width:500px;
+    height:452px;
+    opacity:1;
+}
+
+.iframeTv {
+    border:1px solid black;
+    margin-top: 135px ;
+    margin-right:30px;
+    border-radius: 30px 30px;
+    padding-top:0px;
+    opacity:0.9;
+    width:360px;
+    height:290px;
+
+}
+
+.iframeGB {
+    margin-left:145px;
+    margin-top:60px;
+    width:210px;
+    height:140px;
+}
+
+.iframeIphone {
+    margin-left:35px;
+    margin-top:80px;
+    width:320px;
+    height:450px;
+    opacity:1;
+}
+
+.cube {
+    transform-style: preserve-3d;
+    position:relative;
+    width:250px;
+    height:250px;
+}
+.side {
+    position:absolute;
+    width:250px;
+    height:250px;
+}
+.back.side {
+    perspective: 1000px;
+    transform: translateX(100px) translateY(150px) translateZ(-150px);
+    background-color: hsl(190deg 100% 70%);
+    display:'block';
+    border:2px solid black;
+
+}
+.front.side {
+    perspective: 100px;
+    transform: translateX(100px) translateY(150px) translateZ(150px);
+    background-color: hsl(190, 81%, 39%,0.5);
+    display:'block';
+    border:2px solid black;
+}
+.left.side {
+    transform: translateX(-50px) translateY(150px) rotateY(-90deg);
+    perspective: 1000px;
+    background-color: rgb(196, 84, 39,0.8);
+    display:'block';
+    border:2px solid black;
+}
+.right.side {
+    transform: translateX(250px)  translateY(150px) rotateY(90deg);
+    background-color: rgb(81, 34, 211,0.7);
+    display:'block';
+    border:2px solid black;
+}
+
+@keyframes rotate-cube {
+    0%{transform: rotateX(45deg) rotateY(45deg) }
+    25%{transform: rotateX(-45deg) rotateY(45deg)}
+    50%{transform: rotateX(-45deg) rotateY(-45deg) }
+    75%{transform: rotateX(45deg) rotateY(-45deg) }
+    100%{transform: rotateX(45deg) rotateY(45deg) }
+}
+
+.cube {
+    animation: rotate-cube 12s infinite linear;
+}
