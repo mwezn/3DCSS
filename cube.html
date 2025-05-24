@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+        
 
 div.device {
     background-image: url('tablet.jpg');
@@ -156,18 +157,11 @@ div.iphone {
     </style>
 </head>
 <body>
-
-    <!-- <div class="cube">
-        <div class="front side"></div>
-        <div class="left side"></div>
-        <div class="right side"></div>
-        <div class="back side"></div>
-    </div> -->
-
+    <nav><a href="index.html">Home</a></nav>
     <div id="ex1" class="container">
+        <h3>Click & drag mouse or touchscreen to move the cube</h3>
         <button onclick="changeCSS()">Change CSS</button>
         <div id="ex1-layer" class="cube2"></div>
-        
     </div>
     
 <script>
@@ -246,10 +240,11 @@ div.iphone {
 
 
 
-let vid1= new Element( 'aLwTqZ1Yw_U', 10, 0, 0, 0,'front'); 
-let vid2= new Element( 'jzDYPFNdI0Y', 10, 0, 0, 20,'left')
-let vid3= new Element( 'Imixg3jrJS8', 10, 0, 0, 40,'right')
-let vid4= new Element( 'H_5j0uzlYfo', 10, 0, 0, 60,'back'); 
+
+let vid1= new Element( 'U0_ONQQ5ZNM', 10, 0, 0, 0,'front'); 
+let vid2= new Element( 'SzJ46YA_RaA', 10, 0, 0, 20,'left')
+let vid3= new Element( 'o-xwmTODTUI', 10, 0, 0, 40,'right')
+let vid4= new Element( 'MmG2ah5Df4g', 10, 0, 0, 60,'back'); 
 let vid5= new Element2('https://en.wikipedia.org/wiki/Quaternion',10,0,0,80,'top')
 
 
@@ -345,7 +340,7 @@ document.onmousemove = function(e) { //rotates the perspective when mouse button
   
 };
 
-mouseOverContainer.addEventListener('touchmove', function (event) {
+/*mouseOverContainer.addEventListener('touchmove', function (event) {
   //if one finger touch
   if(event.targetTouches.length == 1)
   {
@@ -353,8 +348,33 @@ mouseOverContainer.addEventListener('touchmove', function (event) {
     
     mouseOverContainer.style.left = touch.pageX + 'px';
     mouseOverContainer.style.top = touch.pageY + 'px';
+    console.log(touch)
+  }
+}, {passive:false});
+
+mouseOverContainer.addEventListener('touchstart', function (event) {
+  //if one finger touch
+  
+    console.log('screen touched!')},{passive: false}
+);*/
+
+document.addEventListener('touchmove', function (event) {
+  //if one finger touch
+  if(event.targetTouches.length == 1)
+  {
+     var touch = event.targetTouches[0];
+    
+    let xy=[touch.pageX,touch.pageY]
+     let position  = xy.concat([ex1Layer]);
+
+  window.requestAnimationFrame(function(){
+    transformElement(ex1Layer, position);
+  })
   }
 }, false);
+
+
+
 
 
 

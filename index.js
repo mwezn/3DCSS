@@ -21,11 +21,11 @@ function Element( id, x, y, z, ry,autoplay=false,cssPic) {
     div.appendChild(iframe)
     container.appendChild(div)
     this.rotateLeft= function (){
-        this.ry-=1
+        this.ry-=10
         div.style.transform = `rotate3d(${this.x},${this.y},${this.z},${this.ry}deg)`;
     }
     this.rotateRight= function (){
-        this.ry+=1
+        this.ry+=10
         div.style.transform = `rotate3d(${this.x},${this.y},${this.z},${this.ry}deg)`;
         
     }
@@ -47,9 +47,6 @@ let v2= new Element('JJMPDABlKWA',0,10,0,0,false,'gameboy')
 //This is the Youtube videos embed code
 // You can right click on a youtube vid & find the embed code there
 
-
-
-console.log(vid1.ry)
 
 document.onkeydown = function(e) { 
     //console.log(e.keyCode)
@@ -87,9 +84,7 @@ document.onkeydown = function(e) {
     }
 }
 
-document.onmousemove = (e)=>{
-    console.log(e.clientX)
-}
+
 
 
 // Make the DIV element draggable:
@@ -106,17 +101,35 @@ function dragElement(elmnt) {
   } else {
     // otherwise, move the DIV from anywhere inside the DIV:
     elmnt.onmousedown = dragMouseDown;
+    elmnt.ontouchmove= dragMouseDown;
   }
 
   function dragMouseDown(e) {
     e = e || window.event;
     e.preventDefault();
     // get the mouse cursor position at startup:
-    pos3 = e.clientX;
-    pos4 = e.clientY;
+    pos3 = e.clientX||e.pageX;
+    pos4 = e.clientY||e.pageY;
     document.onmouseup = closeDragElement;
     // call a function whenever the cursor moves:
     document.onmousemove = elementDrag;
+    document.addEventListener('touchmove', function (e) {
+  //if one finger touch
+  if(event.targetTouches.length == 1)
+  {
+     var touch = e.targetTouches[0];
+    
+    let xy=[touch.pageX,touch.pageY]
+    console.log(xy)
+     pos1 = pos3 - touch.pageX;
+    pos2 = pos4 - touch.pageY;
+    pos3 = touch.pageX;
+    pos4 = touch.pageY;
+    // set the element's new position:
+    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+  }
+}, false);
   }
 
   function elementDrag(e) {
@@ -137,4 +150,11 @@ function dragElement(elmnt) {
     document.onmouseup = null;
     document.onmousemove = null;
   }
+
+
 }
+
+
+
+
+

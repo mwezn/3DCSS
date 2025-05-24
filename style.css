@@ -1,6 +1,4 @@
-div#container{
-    border: 2px solid black;
-}
+
 
 div.device {
     top:300px;
@@ -9,6 +7,10 @@ div.device {
     border:2px solid black;
     width:600px;
     height:580px;
+    opacity:0.7;
+}
+div.device:hover {
+    opacity:1;
 }
 
 div.tv {
@@ -26,8 +28,13 @@ div.iphone {
     background-repeat: no-repeat;
     background-size: 400px 600px;
     width:380px;
-    height:600px
+    height:600px;
+    opacity:0.7;
     
+}
+
+div.iphone:hover {
+    opacity:1;
 }
 
 div.gameboy {
@@ -39,8 +46,13 @@ div.gameboy {
     background-repeat: no-repeat;
     background-size: 500px 300px;
     width:500px;
-    height:300px
+    height:300px;
+    opacity:0.7;
     
+}
+
+div.gameboy:hover {
+    opacity:1;
 }
 
 div#tv {
