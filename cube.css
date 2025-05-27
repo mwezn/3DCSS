@@ -1,0 +1,97 @@
+ 
+        .cube {
+            transform-style: preserve-3d;
+            touch-action: none;
+            position:absolute;
+            perspective: 5000px;
+            top:20px;
+            left:200px;
+            width:500px;
+            height:500px;
+            transform: perspective(5000px) rotateX(45deg) rotateY(50deg);
+            border:3px solid black;
+            transition: all 1s linear;
+            
+        }
+
+        .cube.transition {
+            width:680px;
+            height:700px;
+        }
+
+        .side {
+            position:absolute;
+            width: 280px;
+            height:280px;
+        }
+        .back.side {
+            perspective: 1000px;
+            transform: translateX(100px) translateY(150px) translateZ(-150px);
+            background-color: hsl(190deg 100% 70%);
+            display:'block';
+            border:2px solid black;
+            transition: all 1s linear;
+
+        }
+        .front.side {
+            perspective: 100px;
+            transform: translateX(100px) translateY(150px) translateZ(150px);
+            background-color: hsl(190, 81%, 39%,0.5);
+            display:'block';
+            border:2px solid black;
+            transition: all 1s linear;
+        }
+        .left.side {
+            transform: translateX(-50px) translateY(150px) rotateY(-90deg);
+            perspective: 1000px;
+            background-color: rgb(196, 84, 39,0.8);
+            display:'block';
+            border:2px solid black;
+            transition: all 1s linear;
+        }
+        .right.side {
+            transform: translateX(250px)  translateY(150px) rotateY(90deg);
+            background-color: rgb(81, 34, 211,0.7);
+            display:'block';
+            border:2px solid black;
+            transition: all 1s linear;
+        }
+        .top.side {
+            transform: translateX(500px) translateY(0px) translateZ(100px);
+            opacity:0.8;
+            transition: all 1s linear;
+        }
+        .top.side.transition {
+            transform: translateX(700px);
+        }
+
+        .right.side.transition {
+            transform: translateX(350px) translateY(300px) rotateY(0deg) translateZ(-20px);
+            border: 3px solid black;
+        }
+        .front.side.transition {
+            transform: translateX(350px) translateY(0px) rotateY(0deg) translateZ(-20px);
+            border: 3px solid black;
+        }
+        .left.side.transition {
+            transform: translateY(0px) rotateY(360deg) translateZ(-20px);
+            border: 3px solid black;
+        }
+        .back.side.transition {
+            transform: translateY(300px) translateZ(-20px);
+            border: 3px solid black;
+        }
+
+        @keyframes rotate-cube {
+            0%{transform: rotateX(45deg) rotateY(45deg) }
+            25%{transform: rotateX(-45deg) rotateY(45deg)}
+            50%{transform: rotateX(-45deg) rotateY(-45deg)}
+            75%{transform: rotateX(45deg) rotateY(-45deg) }
+            100%{transform: rotateX(45deg) rotateY(45deg) }
+        }
+
+        @keyframes unfold {
+            0% {transform: translateX(350px) translateY(150px) rotateY(90deg)}
+            50% {transform: translateX(350px) translateY(150px) rotateY(45deg)}
+            100% {transform: translateX(350px) translateY(150px) rotateY(0deg)}
+        }

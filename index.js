@@ -30,19 +30,23 @@ function Element( id, x, y, z, ry,autoplay=false,cssPic) {
         
     }
 
+    this.moveBack = ()=>{
+      this.z/=1.1;
+      div.style.transform= `scale(${this.z})`
+    }
+    this.moveFwd = ()=>{
+      this.z*=1.1;
+      div.style.transform= `scale(${this.z})`
+    }
+
 }
 
 
 
-//green writing below=comments= ignored
-//let v1=new Element( 'pgGrQjYcm5A', 0, 200, 240, -90); //What is PI?
-//let v2=new Element('JJMPDABlKWA', 500, 200, 240, 90 );
-
-
-let vid1= new Element( 'jzDYPFNdI0Y', 0, 10, 0, -45,false,'tv'); 
-let vid2= new Element( 'wBd4euHxP0w', 0, 10, 0, 45,false,'device') ;
-let v1=new Element( 'pgGrQjYcm5A', 0, 10, 0, 0,false,'iphone')
-let v2= new Element('JJMPDABlKWA',0,10,0,0,false,'gameboy')
+let vid1= new Element( 'jzDYPFNdI0Y', 0, 10, 1, 0,false,'tv'); 
+let vid2= new Element( 'tCGmrFyXlGw', 0, 10, 0, 0,false,'device') ; //Pogo No Worries
+let v1=new Element( 'wBd4euHxP0w', 0, 10, 0, 0,false,'iphone');//High contrast
+let v2= new Element('LeBf0wh9n0E',0,10,0,0,false,'gameboy');//Monroe Emily Makis
 
 //This is the Youtube videos embed code
 // You can right click on a youtube vid & find the embed code there
@@ -74,6 +78,7 @@ document.onkeydown = function(e) {
     }
     else if (e.keyCode == 38){ 
         console.log('up')
+        vid1.moveFwd()
   
         
     }
@@ -85,13 +90,16 @@ document.onkeydown = function(e) {
 }
 
 
-
+let tv=document.getElementById("tv")
+let tablet=document.getElementById("device")
+let iphone=document.getElementById("iphone")
+let gameboy=document.getElementById("gameboy")
 
 // Make the DIV element draggable:
-dragElement(document.getElementById("tv"));
-dragElement(document.getElementById("device"));
-dragElement(document.getElementById("iphone"));
-dragElement(document.getElementById("gameboy"));
+dragElement(tv);
+dragElement(tablet);
+dragElement(iphone);
+dragElement(gameboy);
 
 function dragElement(elmnt) {
   var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
@@ -115,7 +123,7 @@ function dragElement(elmnt) {
     document.onmousemove = elementDrag;
     document.addEventListener('touchmove', function (e) {
   //if one finger touch
-  if(event.targetTouches.length == 1)
+  if(e.targetTouches.length == 1)
   {
      var touch = e.targetTouches[0];
     
@@ -153,6 +161,43 @@ function dragElement(elmnt) {
 
 
 }
+
+// Helper function to calculate the distance between two touch points
+function getDistance(touch1, touch2) {
+    const dx = touch2.clientX - touch1.clientX;
+    const dy = touch2.clientY - touch1.clientY;
+    return Math.sqrt(dx * dx + dy * dy);
+}
+
+
+let initialDistance = 0;
+let scale = 1;
+document.addEventListener('touchstart', (event) => {
+    if (event.touches.length === 2) {
+        // Calculate the initial distance between two fingers
+        initialDistance = getDistance(event.touches[0], event.touches[1]);
+        
+    }
+});
+
+
+document.addEventListener('touchmove', function (event) {
+  
+  
+   if (event.touches.length === 2) {
+         
+        // Calculate the current distance between two fingers
+        const currentDistance = getDistance(event.touches[0], event.touches[1]);
+        console.log(initialDistance,currentDistance)
+        
+        // Calculate the scale factor
+        scale = currentDistance / initialDistance;
+
+        // Apply the scale transformation
+        tv.style.transform = `scale(${scale/1},${scale/1})`;
+        tablet.style.transform = `scale(${scale/1},${scale/1})`;
+    }
+}, false);
 
 
 
