@@ -1,7 +1,8 @@
-let container=document.getElementById('container')
+let container=document.querySelectorAll('.carousel-item')
+let group=document.querySelector('.carousel-inner')
 console.log(container)
-
-function Element( youtube=true,id, x, y, z, ry,autoplay=false,cssPic) {
+let init=0;
+function Element( carouselId,youtube=true,id, x, y, z, ry,autoplay,cssPic) {
 
     this.x=x
     this.y=y
@@ -22,20 +23,11 @@ function Element( youtube=true,id, x, y, z, ry,autoplay=false,cssPic) {
     cssPic=='device'?iframe.className='iframe':cssPic=='tv'?iframe.className='iframeTv':cssPic=='gameboy'?
     iframe.className='iframeGB':cssPic=='gbo'?iframe.className='iframeGBO':iframe.className='iframeIphone'
 
-    youtube?iframe.src = [ 'https://www.youtube.com/embed/', id, '?autoplay=1' ].join( '' ):iframe.src=id
-    if (autoplay) iframe.allow='autoplay'
+    youtube?iframe.src = [ 'https://www.youtube.com/embed/', id, '?autoplay=0' ].join( '' ):iframe.src=id;
+    
+  
     div.appendChild(iframe)
-    container.appendChild(div)
-    this.rotateLeft= function (){
-        this.ry-=10
-        div.style.transform = `rotate3d(${this.x},${this.y},${this.z},${this.ry}deg)`;
-        //iframe.style.transform=`rotate3d(${-this.x},${-this.y},${-this.z},${this.ry}deg)`;
-    }
-    this.rotateRight= function (){
-        this.ry+=10
-        div.style.transform = `rotate3d(${this.x},${this.y},${this.z},${this.ry}deg)`;
-        
-    }
+    container[carouselId].appendChild(div)
 
     this.moveBack = ()=>{
      /*this.z/=1.1;
@@ -74,12 +66,14 @@ console.log(playlist[3].name)
 
 //let vid1= new Element( 'jzDYPFNdI0Y', 0, 10, 1, 0,false,'tv'); //Neo Trinity
 //Cjf5RmSYPXM
-let vid1= new Element( false,'./Vids/City.mp4', 0, 10, 1, 0,false,'tv')
-let vid2= new Element( true,'Cjf5RmSYPXM', 0, 10, 1, 0,false,'iphone') ;
-let vid3 = new Element(false,'./Vids/Roof.mp4',0,10,1,0,false, 'device') 
+let vid1= new Element( 0,false,'', 0, 10, 1, 0,false,'tv')
+let vid2= new Element( 1,true,'Cjf5RmSYPXM', 0, 10, 1, 0,false,'iphone') ;
+let vid3 = new Element(2,false,'./Vids/BC1.mp4',0,10,1,0,false, 'device') 
 //let v1=new Element( 'wBd4euHxP0w', 0, 10, 0, 0,false,'iphone')
-let v2= new Element(true,'mZPJfU4ZiQY',0,10,10,0,false,'gameboy'); 
-//let v3= new Element('ZqpRraPbZ-w',0,10,0,0,false,'gbo') */
+let v2= new Element(3,true,'mZPJfU4ZiQY',0,10,10,0,false,'gameboy'); 
+//let v3= new Element('ZqpRraPbZ-w',0,10,0,0,false,'gbo') 
+
+
 
 
 
@@ -90,25 +84,16 @@ document.onkeydown = function(e) {
     //console.log(e.keyCode)
     e.preventDefault();
     if (e.keyCode === 37) {       // left
-      console.log('left')
-      vid1.rotateLeft()  
-      vid2.rotateLeft()
-      vid3.rotateLeft()
-      //v2.rotateLeft()
-      
-      
-    //This function above rotates the element when the left arrow is pressed 
-    //the number 37 represents the UNICODE value in 
-    //usually characters are stored either in Binary(powers of 2) or Hexadecimal (powers of 16)
+     console.log('left')
+     init+=72;
+     group.style.transform= `rotateY(${init}deg)`
+     group.style.transition=`transform 0.8s ease`
     }
     else if (e.keyCode === 39) {  // 
       console.log('right')
-      vid1.rotateRight()
-      vid2.rotateRight()
-      vid3.rotateRight()
-      v2.rotateRight()
-      
-      
+      init-=72;
+     group.style.transform= `rotateY(${init}deg)`
+     group.style.transition=`transform 0.8s ease`
     }
     else if (e.keyCode == 38){ 
         console.log('up')

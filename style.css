@@ -1,9 +1,9 @@
 body {
     touch-action: none;
+    
 }
 
 div.device {
-    top:300px;
     background-image: url('tablet.jpg');
     background-size: 600px 580px;
     border:2px solid black;
@@ -14,6 +14,14 @@ div.device {
 }
 div.device:hover {
     opacity:1;
+}
+
+div.gbo {
+    background-image: url('GBO.jpg');
+    background-size: 400px 600px;
+    width:380px;
+    height:600px;
+    opacity:0.8;
 }
 
 div.tv {
@@ -29,15 +37,13 @@ div.tv:hover {
 }
 div.iphone {
     position:absolute;
-    top:10px;
-    left:600px;
     background-image: url('iphone3.jpg');
     border:3px solid black;
     background-repeat: no-repeat;
     background-size: 400px 600px;
     width:380px;
     height:600px;
-    opacity:0.7;
+    opacity:0.8;
     
 }
 
@@ -47,8 +53,6 @@ div.iphone:hover {
 
 div.gameboy {
     position:absolute;
-    top:0px;
-    left:300px;
     background-image: url('gameboy.jpeg');
     border:3px solid black;
     background-repeat: no-repeat;
@@ -114,6 +118,13 @@ div#device {
     margin-top:80px;
     width:320px;
     height:450px;
+    opacity:1;
+}
+.iframeGBO {
+    margin-left:142px;
+    margin-top:110px;
+    width:110px;
+    height:150px;
     opacity:1;
 }
 
