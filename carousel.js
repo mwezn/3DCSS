@@ -24,6 +24,9 @@ function Element( carouselId,youtube=true,id, x, y, z, ry,autoplay,cssPic) {
     iframe.className='iframeGB':cssPic=='gbo'?iframe.className='iframeGBO':iframe.className='iframeIphone'
 
     youtube?iframe.src = [ 'https://www.youtube.com/embed/', id, '?autoplay=0' ].join( '' ):iframe.src=id;
+
+
+    if (autoplay) iframe.allow='autoplay'
     
   
     div.appendChild(iframe)
@@ -54,10 +57,13 @@ function Element( carouselId,youtube=true,id, x, y, z, ry,autoplay,cssPic) {
 
 let playlist=[{name: 'Skream 99 Infinity', emded: '6nLiZzryT8A'},
   {name:'Tina Moore Tuff Jam',embed:null},
+  {name:'UKG Grime mix',embed:'3ji1JpMfkHA'},
   {name: 'Dole & Kom Together one time Butch', embed:'ctyDMv5tigo'},
   {name:'Shades of rhythm- Hylo edit', embed:null},
   {name:'Tyreese -Criminal minds instrumental',embed:'tlCKXknvUSg'},
-  {name:'Kiesza-Hideaway', embed:'Vnoz5uBEWOA'}
+  {name:'Kiesza-Hideaway', embed:'Vnoz5uBEWOA'},
+  {name:'Mr Traumatik - wide awake', embed: 'EncKrq8zK_E'},
+  {name:'MK- Burning', embed:'cIJ0EvV-aMs'}
 
 
 ]
@@ -65,13 +71,27 @@ console.log(playlist[3].name)
 
 
 //let vid1= new Element( 'jzDYPFNdI0Y', 0, 10, 1, 0,false,'tv'); //Neo Trinity
-//Cjf5RmSYPXM
-let vid1= new Element( 0,false,'', 0, 10, 1, 0,false,'tv')
-let vid2= new Element( 1,true,'Cjf5RmSYPXM', 0, 10, 1, 0,false,'iphone') ;
-let vid3 = new Element(2,false,'./Vids/BC1.mp4',0,10,1,0,false, 'device') 
-//let v1=new Element( 'wBd4euHxP0w', 0, 10, 0, 0,false,'iphone')
-let v2= new Element(3,true,'mZPJfU4ZiQY',0,10,10,0,false,'gameboy'); 
-//let v3= new Element('ZqpRraPbZ-w',0,10,0,0,false,'gbo') 
+let vid1= new Element( 0,true,'zZCqkZzpT6c', 0, 10, 1, 0,false,'tv')
+let vid2= new Element( 1,false,'./Vids/Handstand.mp4', 0, 10, 1, 0,false,'iphone') ;
+let vid3 = new Element(2,true,'GtS9ldLfjPc',0,10,1,0,false, 'device') 
+
+let v2= new Element(3,true,'59nD-OC-1ZQ',0,10,10,0,false,'gameboy'); 
+let v3= new Element(4,true,'fe32Iag9RCQ',0,10,10,0,false,'device');
+
+
+
+
+function rotateRight(){
+  init-=72;
+  group.style.transform= `rotateY(${init}deg)`
+  group.style.transition=`transform 0.8s ease`
+}
+
+function rotateLeft(){
+     init+=72;
+     group.style.transform= `rotateY(${init}deg)`
+     group.style.transition=`transform 0.8s ease`
+}
 
 
 
@@ -84,16 +104,10 @@ document.onkeydown = function(e) {
     //console.log(e.keyCode)
     e.preventDefault();
     if (e.keyCode === 37) {       // left
-     console.log('left')
-     init+=72;
-     group.style.transform= `rotateY(${init}deg)`
-     group.style.transition=`transform 0.8s ease`
+     rotateLeft()
     }
     else if (e.keyCode === 39) {  // 
-      console.log('right')
-      init-=72;
-     group.style.transform= `rotateY(${init}deg)`
-     group.style.transition=`transform 0.8s ease`
+      rotateRight()
     }
     else if (e.keyCode == 38){ 
         console.log('up')

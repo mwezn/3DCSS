@@ -7,14 +7,15 @@ function Element( youtube=true,id, x, y, z, ry,autoplay=false,cssPic) {
     this.y=y
     this.z=z
     this.ry=ry
+    this.isActive=false;
     const div = document.createElement( 'div' );
 
-    let isActive=false;
+    //let isActive=false;
     div.id=cssPic
     div.className=cssPic
     //div.style.transform = `rotate3d(${this.x},${this.y},${this.z},${this.ry}deg)`; //rotates deg around a vector (x,y,z)    
     div.addEventListener('click',()=>{
-      isActive=!isActive
+      this.isActive=!this.isActive
       console.log(div.id)
     })
     const iframe = document.createElement( 'iframe' );
@@ -40,7 +41,7 @@ function Element( youtube=true,id, x, y, z, ry,autoplay=false,cssPic) {
     this.moveBack = ()=>{
      /*this.z/=1.1;
       div.style.transform=`scale(${this.z})`*/
-      if(isActive){
+      if(this.isActive){
         this.z-=100;
         div.style.transform= `perspective(1000px) translateZ(${this.z}px)`
       }
@@ -50,7 +51,7 @@ function Element( youtube=true,id, x, y, z, ry,autoplay=false,cssPic) {
     this.moveFwd = ()=>{
       //this.z*=1.1;
       //div.style.transform=`scale(${this.z})`
-      if(isActive){
+      if(this.isActive){
         this.z+=100;
         div.style.transform= `perspective(1000px) translateZ(${this.z}px)`
       }
@@ -61,7 +62,6 @@ function Element( youtube=true,id, x, y, z, ry,autoplay=false,cssPic) {
 }
 
 let playlist=[{name: 'Skream 99 Infinity', emded: '6nLiZzryT8A'},
-  {name:'Tina Moore Tuff Jam',embed:null},
   {name: 'Dole & Kom Together one time Butch', embed:'ctyDMv5tigo'},
   {name:'Shades of rhythm- Hylo edit', embed:null},
   {name:'Tyreese -Criminal minds instrumental',embed:'tlCKXknvUSg'},
@@ -69,17 +69,14 @@ let playlist=[{name: 'Skream 99 Infinity', emded: '6nLiZzryT8A'},
 
 
 ]
-console.log(playlist[3].name)
 
 
-//let vid1= new Element( 'jzDYPFNdI0Y', 0, 10, 1, 0,false,'tv'); //Neo Trinity
-//Cjf5RmSYPXM
-let vid1= new Element( false,'./Vids/City.mp4', 0, 10, 1, 0,false,'tv')
-let vid2= new Element( true,'Cjf5RmSYPXM', 0, 10, 1, 0,false,'iphone') ;
-let vid3 = new Element(false,'./Vids/Roof.mp4',0,10,1,0,false, 'device') 
-//let v1=new Element( 'wBd4euHxP0w', 0, 10, 0, 0,false,'iphone')
+//let vid1= new Element( true,'jzDYPFNdI0Y', 0, 10, 1, 0,false,'tv'); //Neo Trinity
+let vid1= new Element( false,'./Vids/Bees.mp4', 0, 10, 1, 0,false,'tv')
+let vid3 = new Element(false,'./Vids/Bees1.mp4',0,10,1,0,false, 'device') 
+let v1=new Element( false,'./Vids/Bees2.mp4', 0, 10, 0, 0,true,'iphone')
 let v2= new Element(true,'mZPJfU4ZiQY',0,10,10,0,false,'gameboy'); 
-//let v3= new Element('ZqpRraPbZ-w',0,10,0,0,false,'gbo') */
+
 
 
 
@@ -92,40 +89,17 @@ document.onkeydown = function(e) {
     if (e.keyCode === 37) {       // left
       console.log('left')
       vid1.rotateLeft()  
-      vid2.rotateLeft()
-      vid3.rotateLeft()
-      //v2.rotateLeft()
-      
-      
-    //This function above rotates the element when the left arrow is pressed 
-    //the number 37 represents the UNICODE value in 
-    //usually characters are stored either in Binary(powers of 2) or Hexadecimal (powers of 16)
     }
     else if (e.keyCode === 39) {  // 
       console.log('right')
       vid1.rotateRight()
-      vid2.rotateRight()
-      vid3.rotateRight()
-      v2.rotateRight()
-      
-      
     }
     else if (e.keyCode == 38){ 
         console.log('up')
         vid1.moveFwd()
-        vid2.moveFwd()
-        vid3.moveFwd()
-        v2.moveFwd()
-  
-        
     }
     else if (e.keyCode == 40){ 
         console.log('down')
-        vid1.moveBack()
-        vid2.moveBack()
-        vid3.moveBack()
-        v2.moveBack()
-    
     }
 }
 
@@ -141,7 +115,7 @@ let gameboy=document.getElementById("gameboy")
 dragElement(tv);
 
 dragElement(iphone);
-dragElement(gameboy);
+//dragElement(gameboy);
 dragElement(tablet)
 
 function dragElement(elmnt) {
@@ -154,6 +128,8 @@ function dragElement(elmnt) {
     elmnt.onmousedown = dragMouseDown;
     elmnt.ontouchmove= dragMouseDown;
   }
+
+  
 
   function dragMouseDown(e) {
     e = e || window.event;
@@ -194,6 +170,7 @@ function dragElement(elmnt) {
     // set the element's new position:
     elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
     elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+    console.log(elmnt,elmnt.isActive)
   }
 
   function closeDragElement() {

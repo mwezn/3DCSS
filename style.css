@@ -3,13 +3,67 @@ body {
     
 }
 
+div.tv {
+    background-image: url('./Imgs/oldtv.jpg');
+    background-size: 180px 200px;
+    width:170px;
+    height:200px;
+    opacity:0.6;
+    border:1px solid black;
+    
+}
+
+.iframeTv {
+    border:1px solid black;
+    margin-top: 60px ;
+    margin-left: 30px;
+    border-radius: 20px 20px;
+    padding-top:0px;
+    opacity:0.9;
+    width:100px;
+    height:110px;
+    z-index:20;
+
+}
+div.tv:hover {
+    opacity:1;
+}
+
 div.device {
-    background-image: url('tablet.jpg');
+    background-image: url('./Imgs/tablet.jpg');
+    background-size: 300px 580px;
+    border:2px solid black;
+    width:300px;
+    height:580px;
+    opacity:0.7;
+
+}
+div.device:hover {
+    opacity:1;
+}
+
+
+.iframe {
+    margin-top:60px;
+    margin-left:20px;
+    width:250px;
+    height:465px;
+    opacity:1;
+}
+
+
+
+
+
+ @media screen and (min-width: 550px) {
+
+div.device {
+    background-image: url('./Imgs/tablet.jpg');
     background-size: 600px 580px;
     border:2px solid black;
     width:600px;
     height:580px;
-    opacity:0.5;
+    opacity:0.7;
 
 }
 div.device:hover {
@@ -17,7 +71,7 @@ div.device:hover {
 }
 
 div.gbo {
-    background-image: url('GBO.jpg');
+    background-image: url('./Imgs/GBO.jpg');
     background-size: 400px 600px;
     width:380px;
     height:600px;
@@ -25,7 +79,9 @@ div.gbo {
 }
 
 div.tv {
-    background-image: url('oldtv.jpg');
+    background-image: url('./Imgs/oldtv.jpg');
+    background-size: 600px 500px;
+    transform: scale(1,1);
     width:600px;
     height:500px;
     opacity:0.6;
@@ -37,7 +93,7 @@ div.tv:hover {
 }
 div.iphone {
     position:absolute;
-    background-image: url('iphone3.jpg');
+    background-image: url('./Imgs/iphone3.jpg');
     border:3px solid black;
     background-repeat: no-repeat;
     background-size: 400px 600px;
@@ -53,7 +109,7 @@ div.iphone:hover {
 
 div.gameboy {
     position:absolute;
-    background-image: url('gameboy.jpeg');
+    background-image: url('./Imgs/gameboy.jpeg');
     border:3px solid black;
     background-repeat: no-repeat;
     background-size: 500px 300px;
@@ -97,7 +153,7 @@ div#device {
 .iframeTv {
     border:1px solid black;
     margin-top: 150px ;
-    margin-right:40px;
+    margin-right:80px;
     border-radius: 30px 30px;
     padding-top:0px;
     opacity:0.9;
@@ -128,54 +184,4 @@ div#device {
     opacity:1;
 }
 
-.cube2 {
-    transform-style: preserve-3d;
-    position:relative;
-    width:250px;
-    height:250px;
-}
-.side {
-    position:absolute;
-    width:250px;
-    height:250px;
-}
-.back.side {
-    perspective: 1000px;
-    transform: translateX(100px) translateY(150px) translateZ(-150px);
-    background-color: hsl(190deg 100% 70%);
-    display:'block';
-    border:2px solid black;
-
-}
-.front.side {
-    perspective: 100px;
-    transform: translateX(100px) translateY(150px) translateZ(150px);
-    background-color: hsl(190, 81%, 39%,0.5);
-    display:'block';
-    border:2px solid black;
-}
-.left.side {
-    transform: translateX(-50px) translateY(150px) rotateY(-90deg);
-    perspective: 1000px;
-    background-color: rgb(196, 84, 39,0.8);
-    display:'block';
-    border:2px solid black;
-}
-.right.side {
-    transform: translateX(250px)  translateY(150px) rotateY(90deg);
-    background-color: rgb(81, 34, 211,0.7);
-    display:'block';
-    border:2px solid black;
-}
-
-@keyframes rotate-cube {
-    0%{transform: rotateX(45deg) rotateY(45deg) }
-    25%{transform: rotateX(-45deg) rotateY(45deg)}
-    50%{transform: rotateX(-45deg) rotateY(-45deg) }
-    75%{transform: rotateX(45deg) rotateY(-45deg) }
-    100%{transform: rotateX(45deg) rotateY(45deg) }
-}
-
-.cube {
-    animation: rotate-cube 12s infinite linear;
-}
+ }
